@@ -1,103 +1,86 @@
-import Image from "next/image";
+'use client';
+
+import Card from "./components/Card";
+import ModalCarrinho from "./components/ModalCarrinho";
+import { useState } from "react";
+
+type Dessert = {
+  title: string;
+  description: string;
+  image: string;
+  price: string;
+};
+
+const desserts: Dessert []= [
+  {
+    title: "Bolo de Rolo",
+    description: "Um tradicional bolo de rolo pernambucano, feito com camadas finas de massa e recheio de goiabada.",
+    image: "https://img.freepik.com/vetores-premium/bolo-de-rolo-com-vetor-de-icone-de-comida-plana-de-desenho-animado-de-cobertura-de-morango_374761-236.jpg",
+    price: "15.00"
+  },
+  {
+    title: "Brigadeiro",
+    description: "O famoso brigadeiro, doce de leite condensado, chocolate e granulado. Um clássico das festas brasileiras.",
+    image: "https://media.istockphoto.com/id/1452529232/pt/vetorial/brigadeiro-traditional-brazilian-desert-latino-american-food-realistic-cartoon-illustration.jpg?s=612x612&w=0&k=20&c=nIYOWtdhN0YWhHFHIH6ghZbh7QOpgeOPQqgAIa6YtJ8=",
+    price: "20.00"
+
+  },
+  {
+    title: "Pavê de Chocolate",
+    description: "Uma sobremesa deliciosa com camadas de biscoito, creme de chocolate e cobertura de chantilly.",
+    image: "https://gartic.com.br/imgs/mural/se/sevenfold/pave-2.png",
+    price: "16.20"
+
+  },
+  {
+    title: "Quindim",
+    description: "Doce típico do Brasil, feito com coco, gema de ovo e açúcar. Um sabor irresistível.",
+    image: "https://media.istockphoto.com/id/1459078453/pt/vetorial/brazilian-dessert-quindim-with-coconut-flakes-latin-american-sweets-national-latin.jpg?s=612x612&w=0&k=20&c=fqbN6VaSvIIcfudHRkgQRYamvXpk1iRApBKXSLhfXgs=",
+    price: "23.00"
+
+  },
+  {
+    title: "Cocada",
+    description: "Doce de coco com açúcar, que pode ser feito com coco fresco ou desidratado, crocante e delicioso.",
+    image: "https://gartic.com.br/imgs/mural/xf/xfector_/cocada.png",
+    price: "14.50"
+
+  },
+  {
+    title: "Canjica",
+    description: "Sobremesa de milho verde cozido com leite condensado, coco e amendoim. Uma verdadeira iguaria do nordeste.",
+    image: "https://w7.pngwing.com/pngs/933/830/png-transparent-food-computer-icons-canjica-scalable-graphics-junina-brazilian-food-junina-brazilian-cookware-and-bakeware.png",
+    price: "13.80"
+
+  }
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    // estado para armazenar os itens do carrinho
+  const [cartItems, setCartItems] = useState<Dessert[]>([]); 
+  // função para adicionar itens ao carrinho
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // prevent representa a lista de itens que já estão no carrinho
+  // ... os itens já estão no carrinho
+  // item adiciona um novo item ao cattinho
+  const handleAddToCart = (item: Dessert) => {
+    setCartItems((prevItems) => [...prevItems, item]);
+  };
+  return (
+    <div className="bg-orange-50 min-h-screen p-4">
+      <h2 className="text-[20px] text-orange-600 font-bold ms-8 mb-4">Desserts</h2>
+
+      <div className="flex gap-6">
+        <div className="flex flex-wrap gap-6 flex-1">
+            {desserts.map((dessert) => (
+            <Card key={dessert.title} {...dessert} onAddToCart={handleAddToCart}/>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="w-[320px]">
+          <ModalCarrinho cartItems={cartItems} setCartItems={setCartItems}/>
+        </div>
+      </div>
     </div>
   );
 }
