@@ -21,7 +21,7 @@ const ModalCarrinho = ({ cartItems, setCartItems}: ModalCarrinhoProps) => {
   };
   const handleCloseModal = () => {
     setIsModalOpen(false); // Fecha o modal de confirmação
-    setCartItems([]); // Limpa o carrinho
+    // setCartItems([]); // Limpa o carrinho
   };
   return (
     <div className="fixed right-4 top-20 w-[320px] bg-white shadow-lg rounded-lg border p-4">
@@ -48,7 +48,15 @@ const ModalCarrinho = ({ cartItems, setCartItems}: ModalCarrinhoProps) => {
           ))}
         </ul>
       )}
-
+      <div className='flex justify-between mt-4 pt-2'>
+        <span className='text-sm text-gray-700'> Ordem Total</span>
+        <span className="font-bold text-gray-500">R$
+          {cartItems.reduce(
+            (total, item) => total + parseFloat(item.price), 
+            0
+          ).toFixed(2)}
+        </span>
+      </div>
       <button onClick={handleOpenModal} className="w-full text-white bg-orange-600 rounded-lg py-2 hover:bg-orange-700 transition mt-4">
       Confirm Order
       </button>
