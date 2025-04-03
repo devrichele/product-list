@@ -1,7 +1,7 @@
 'use client';
 
-import Card from "./components/Card";
-import ModalCarrinho from "./components/ModalCarrinho";
+import Card from "../components/Card";
+import ModalCarrinho from "../components/ModalCarrinho";
 import { useState } from "react";
 
 type Dessert = {
