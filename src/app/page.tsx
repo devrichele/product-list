@@ -16,6 +16,7 @@ export default function Home() {
   const handleAddToCart = (item: Dessert) => {
     setCartItems((prevItems) => [...prevItems, item]);
   };
+
   return (
     <div className="bg-orange-50 min-h-screen p-4">
       <h2 className="text-[20px] text-orange-600 font-bold ms-8 mb-4">

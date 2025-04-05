@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { CardProps } from "@/types/cardProps";
+import { IoRemoveCircleOutline } from "react-icons/io5";
+import { IoAddCircleOutline } from "react-icons/io5";
+
+
 
 interface ExtendedCardProps extends CardProps {
   onAddToCart?: (item: CardProps) => void;
@@ -39,6 +43,12 @@ const Card = (props: ExtendedCardProps) => {
               Add to Cart
             </span>
           </Button>
+          <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center">
+            {/* <Button className="w-[150px] flex items-center justify-between gap-2 bg-orange-600 border border-gray-300 rounded-full py-[6px] hover:bg-orange-600 transition">
+              <IoRemoveCircleOutline className="w-5 h-5" />
+              <IoAddCircleOutline className="w-5 h-5" />
+            </Button> */}
+          </div>
         </div>
       </div>
       <div className="mt-7 text-center">
@@ -46,7 +56,6 @@ const Card = (props: ExtendedCardProps) => {
         <div className="mt-2 text-left">
           <p className="text-gray-600 text-sm">{description}</p>
           <span className="text-gray-500 text-sm font-bold block mt-1">
-            {" "}
             R$ {price}
           </span>
         </div>
