@@ -23,11 +23,11 @@ const ModalCarrinho = ({ cartItems, setCartItems }: ModalCarrinhoProps) => {
   return (
     <div className="fixed right-4 top-20 w-[320px] bg-white shadow-lg rounded-lg border p-4">
       <h2 className="text-lg font-semibold text-orange-600 border-b pb-2">
-        Your Cart
+        Seu carrinho
       </h2>
       {/* length é um método que retorna o número de itens no array */}
       {cartItems.length === 0 ? (
-        <p className="text-gray-500 text-sm mt-2">empty cart</p>
+        <p className="text-gray-500 text-sm mt-2">carrinho vazio</p>
       ) : (
         <ul className="mt-2">
           {cartItems.map((item, index) => (
@@ -43,7 +43,9 @@ const ModalCarrinho = ({ cartItems, setCartItems }: ModalCarrinhoProps) => {
                 />
                 <span>{item.title}</span>
               </div>
-              <span className="font-bold text-gray-500">R$ {item.price}</span>
+              <span className="font-bold text-gray-500">
+                R$ {item.price} x {item.quantity || 1}
+              </span>
               <button
                 onClick={() => handleRemoveItem(index)} // Chama a função para remover o item
                 className="text-red-500 hover:text-red-700"
@@ -55,11 +57,15 @@ const ModalCarrinho = ({ cartItems, setCartItems }: ModalCarrinhoProps) => {
         </ul>
       )}
       <div className="flex justify-between mt-4 pt-2">
-        <span className="text-sm text-gray-700"> Ordem Total</span>
+        <span className="text-sm text-gray-700"> Total do pedido </span>
         <span className="font-bold text-gray-500">
           R$
           {cartItems
-            .reduce((total, item) => total + parseFloat(item.price), 0)
+            .reduce(
+              (total, item) =>
+                total + parseFloat(item.price) * (item.quantity || 1),
+              0
+            )
             .toFixed(2)}
         </span>
       </div>
@@ -67,7 +73,7 @@ const ModalCarrinho = ({ cartItems, setCartItems }: ModalCarrinhoProps) => {
         onClick={handleOpenModal}
         className="w-full text-white bg-orange-600 rounded-lg py-2 hover:bg-orange-700 transition mt-4"
       >
-        Confirm Order
+        Confirmar pedido
       </button>
       <div>
         {isModalOpen && <ModalConfirmed handleClose={handleCloseModal} />}

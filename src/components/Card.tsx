@@ -52,11 +52,11 @@ const Card = (props: ExtendedCardProps) => {
             <Button
               onClick={handleAddToCart}
               variant="outline"
-              className="w-[150px] flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-full py-[6px] hover:bg-gray-100 transition"
+              className="w-[175px] flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-full py-[6px] hover:bg-gray-100 transition"
             >
               <ShoppingCart className="w-4 h-4 text-orange-500" />
               <span className="text-gray-800 font-medium text-sm">
-                Add to Cart
+                Adicionar ao Carrinho
               </span>
             </Button>
           )}

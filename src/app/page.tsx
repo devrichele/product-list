@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="bg-orange-50 min-h-screen p-4">
       <h2 className="text-[20px] text-orange-600 font-bold ms-8 mb-4">
-        Desserts
+        Sobremesas
       </h2>
 
       <div className="flex gap-6">
